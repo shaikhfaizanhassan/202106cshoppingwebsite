@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AddtoCart.Models.tbproduct>
+
+@{
+    ViewBag.Title = "BrandPage";
+}
+
+<h2>BrandPage</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.p_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.p_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pimage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pdescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pEntry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbbrand.b_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbcat.c_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.p_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pimage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pdescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pEntry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbbrand.b_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbcat.c_name)
+        </td>
+        <td>
+            @Html.ActionLink("Detail", "BrandDetail", new { id = item.id }, new { @class="btn btn-info"}) |
+        </td>
+    </tr>
+}
+
+</table>

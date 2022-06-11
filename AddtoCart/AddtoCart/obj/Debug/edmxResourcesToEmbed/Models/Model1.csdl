@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shoppingdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="passwords" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbbrand">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="b_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbproducts" Relationship="Self.FK__tbproduct__pbran__286302EC" FromRole="tbbrand" ToRole="tbproduct" />
+  </EntityType>
+  <EntityType Name="tbcat">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="c_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbproducts" Relationship="Self.FK__tbproduct__pcate__276EDEB3" FromRole="tbcat" ToRole="tbproduct" />
+  </EntityType>
+  <EntityType Name="tbproduct">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="p_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="p_price" Type="Int32" />
+    <Property Name="pimage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="pcategory" Type="Int32" />
+    <Property Name="pbrand" Type="Int32" />
+    <Property Name="pdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pEntry" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tbbrand" Relationship="Self.FK__tbproduct__pbran__286302EC" FromRole="tbproduct" ToRole="tbbrand" />
+    <NavigationProperty Name="tbcat" Relationship="Self.FK__tbproduct__pcate__276EDEB3" FromRole="tbproduct" ToRole="tbcat" />
+  </EntityType>
+  <Association Name="FK__tbproduct__pbran__286302EC">
+    <End Role="tbbrand" Type="Self.tbbrand" Multiplicity="0..1" />
+    <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbbrand">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbproduct">
+        <PropertyRef Name="pbrand" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbproduct__pcate__276EDEB3">
+    <End Role="tbcat" Type="Self.tbcat" Multiplicity="0..1" />
+    <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbcat">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbproduct">
+        <PropertyRef Name="pcategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="shoppingdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="tbbrands" EntityType="Self.tbbrand" />
+    <EntitySet Name="tbcats" EntityType="Self.tbcat" />
+    <EntitySet Name="tbproducts" EntityType="Self.tbproduct" />
+    <AssociationSet Name="FK__tbproduct__pbran__286302EC" Association="Self.FK__tbproduct__pbran__286302EC">
+      <End Role="tbbrand" EntitySet="tbbrands" />
+      <End Role="tbproduct" EntitySet="tbproducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbproduct__pcate__276EDEB3" Association="Self.FK__tbproduct__pcate__276EDEB3">
+      <End Role="tbcat" EntitySet="tbcats" />
+      <End Role="tbproduct" EntitySet="tbproducts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

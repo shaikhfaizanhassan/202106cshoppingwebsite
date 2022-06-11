@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="shoppingdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="passwords" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbbrand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="b_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbcat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="p_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="p_price" Type="int" />
+          <Property Name="pimage" Type="nvarchar" MaxLength="200" />
+          <Property Name="pcategory" Type="int" />
+          <Property Name="pbrand" Type="int" />
+          <Property Name="pdescription" Type="nvarchar(max)" />
+          <Property Name="pEntry" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__tbproduct__pbran__286302EC">
+          <End Role="tbbrand" Type="Self.tbbrand" Multiplicity="0..1" />
+          <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbbrand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbproduct">
+              <PropertyRef Name="pbrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbproduct__pcate__276EDEB3">
+          <End Role="tbcat" Type="Self.tbcat" Multiplicity="0..1" />
+          <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbcat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbproduct">
+              <PropertyRef Name="pcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="shoppingdbModelStoreContainer">
+          <EntitySet Name="admins" EntityType="Self.admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbbrand" EntityType="Self.tbbrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbcat" EntityType="Self.tbcat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbproduct" EntityType="Self.tbproduct" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbproduct__pbran__286302EC" Association="Self.FK__tbproduct__pbran__286302EC">
+            <End Role="tbbrand" EntitySet="tbbrand" />
+            <End Role="tbproduct" EntitySet="tbproduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbproduct__pcate__276EDEB3" Association="Self.FK__tbproduct__pcate__276EDEB3">
+            <End Role="tbcat" EntitySet="tbcat" />
+            <End Role="tbproduct" EntitySet="tbproduct" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="shoppingdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="passwords" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbbrand">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="b_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbproducts" Relationship="Self.FK__tbproduct__pbran__286302EC" FromRole="tbbrand" ToRole="tbproduct" />
+        </EntityType>
+        <EntityType Name="tbcat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbproducts" Relationship="Self.FK__tbproduct__pcate__276EDEB3" FromRole="tbcat" ToRole="tbproduct" />
+        </EntityType>
+        <EntityType Name="tbproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="p_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="p_price" Type="Int32" />
+          <Property Name="pimage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="pcategory" Type="Int32" />
+          <Property Name="pbrand" Type="Int32" />
+          <Property Name="pdescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pEntry" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbbrand" Relationship="Self.FK__tbproduct__pbran__286302EC" FromRole="tbproduct" ToRole="tbbrand" />
+          <NavigationProperty Name="tbcat" Relationship="Self.FK__tbproduct__pcate__276EDEB3" FromRole="tbproduct" ToRole="tbcat" />
+        </EntityType>
+        <Association Name="FK__tbproduct__pbran__286302EC">
+          <End Role="tbbrand" Type="Self.tbbrand" Multiplicity="0..1" />
+          <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbbrand">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbproduct">
+              <PropertyRef Name="pbrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbproduct__pcate__276EDEB3">
+          <End Role="tbcat" Type="Self.tbcat" Multiplicity="0..1" />
+          <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbcat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbproduct">
+              <PropertyRef Name="pcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="shoppingdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="tbbrands" EntityType="Self.tbbrand" />
+          <EntitySet Name="tbcats" EntityType="Self.tbcat" />
+          <EntitySet Name="tbproducts" EntityType="Self.tbproduct" />
+          <AssociationSet Name="FK__tbproduct__pbran__286302EC" Association="Self.FK__tbproduct__pbran__286302EC">
+            <End Role="tbbrand" EntitySet="tbbrands" />
+            <End Role="tbproduct" EntitySet="tbproducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbproduct__pcate__276EDEB3" Association="Self.FK__tbproduct__pcate__276EDEB3">
+            <End Role="tbcat" EntitySet="tbcats" />
+            <End Role="tbproduct" EntitySet="tbproducts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="shoppingdbModelStoreContainer" CdmEntityContainer="shoppingdbEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="shoppingdbModel.admin">
+              <MappingFragment StoreEntitySet="admins">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="passwords" ColumnName="passwords" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbbrands">
+            <EntityTypeMapping TypeName="shoppingdbModel.tbbrand">
+              <MappingFragment StoreEntitySet="tbbrand">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="b_name" ColumnName="b_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbcats">
+            <EntityTypeMapping TypeName="shoppingdbModel.tbcat">
+              <MappingFragment StoreEntitySet="tbcat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbproducts">
+            <EntityTypeMapping TypeName="shoppingdbModel.tbproduct">
+              <MappingFragment StoreEntitySet="tbproduct">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="p_price" ColumnName="p_price" />
+                <ScalarProperty Name="pimage" ColumnName="pimage" />
+                <ScalarProperty Name="pcategory" ColumnName="pcategory" />
+                <ScalarProperty Name="pbrand" ColumnName="pbrand" />
+                <ScalarProperty Name="pdescription" ColumnName="pdescription" />
+                <ScalarProperty Name="pEntry" ColumnName="pEntry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

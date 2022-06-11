@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="shoppingdbModelStoreContainer" CdmEntityContainer="shoppingdbEntities">
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="shoppingdbModel.admin">
+        <MappingFragment StoreEntitySet="admins">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="passwords" ColumnName="passwords" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbbrands">
+      <EntityTypeMapping TypeName="shoppingdbModel.tbbrand">
+        <MappingFragment StoreEntitySet="tbbrand">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="b_name" ColumnName="b_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbcats">
+      <EntityTypeMapping TypeName="shoppingdbModel.tbcat">
+        <MappingFragment StoreEntitySet="tbcat">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="c_name" ColumnName="c_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbproducts">
+      <EntityTypeMapping TypeName="shoppingdbModel.tbproduct">
+        <MappingFragment StoreEntitySet="tbproduct">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="p_name" ColumnName="p_name" />
+          <ScalarProperty Name="p_price" ColumnName="p_price" />
+          <ScalarProperty Name="pimage" ColumnName="pimage" />
+          <ScalarProperty Name="pcategory" ColumnName="pcategory" />
+          <ScalarProperty Name="pbrand" ColumnName="pbrand" />
+          <ScalarProperty Name="pdescription" ColumnName="pdescription" />
+          <ScalarProperty Name="pEntry" ColumnName="pEntry" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
