@@ -35,7 +35,7 @@
     <Property Name="pdescription" Type="nvarchar(max)" />
     <Property Name="pEntry" Type="datetime" />
   </EntityType>
-  <Association Name="FK__tbproduct__pbran__286302EC">
+  <Association Name="FK__tbproduct__pbran__2A4B4B5E">
     <End Role="tbbrand" Type="Self.tbbrand" Multiplicity="0..1" />
     <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
     <ReferentialConstraint>
@@ -47,7 +47,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tbproduct__pcate__276EDEB3">
+  <Association Name="FK__tbproduct__pcate__29572725">
     <End Role="tbcat" Type="Self.tbcat" Multiplicity="0..1" />
     <End Role="tbproduct" Type="Self.tbproduct" Multiplicity="*" />
     <ReferentialConstraint>
@@ -64,11 +64,11 @@
     <EntitySet Name="tbbrand" EntityType="Self.tbbrand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbcat" EntityType="Self.tbcat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbproduct" EntityType="Self.tbproduct" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__tbproduct__pbran__286302EC" Association="Self.FK__tbproduct__pbran__286302EC">
+    <AssociationSet Name="FK__tbproduct__pbran__2A4B4B5E" Association="Self.FK__tbproduct__pbran__2A4B4B5E">
       <End Role="tbbrand" EntitySet="tbbrand" />
       <End Role="tbproduct" EntitySet="tbproduct" />
     </AssociationSet>
-    <AssociationSet Name="FK__tbproduct__pcate__276EDEB3" Association="Self.FK__tbproduct__pcate__276EDEB3">
+    <AssociationSet Name="FK__tbproduct__pcate__29572725" Association="Self.FK__tbproduct__pcate__29572725">
       <End Role="tbcat" EntitySet="tbcat" />
       <End Role="tbproduct" EntitySet="tbproduct" />
     </AssociationSet>
