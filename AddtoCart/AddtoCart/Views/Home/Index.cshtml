@@ -1,64 +1,39 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
 }
 
-<style>
-    .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 300px;
-        margin: auto;
-        text-align: center;
-        font-family: arial;
-    }
-
-    .price {
-        color: grey;
-        font-size: 22px;
-    }
-
-    .card button {
-        border: none;
-        outline: 0;
-        padding: 12px;
-        color: white;
-        background-color: #000;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
-        font-size: 18px;
-    }
-
-        .card button:hover {
-            opacity: 0.7;
-        }
-</style>
 <h2>Index</h2>
-<div class="row">
+
+@{
+    foreach (var item in ViewBag.s)
+    {
+        <div class="col-md-3 col-sm-4">
+            <div class="single-new-arrival">
+                <div class="single-new-arrival-bg">
+                    <img src="~/ProductImage/@item.pimage" alt="new-arrivals images">
+                    <div class="single-new-arrival-bg-overlay"></div>
+                    <div class="sale bg-1">
+                        <p>sale</p>
+                    </div>
+                    <div class="new-arrival-cart">
+                        <p>
+                            <span class="lnr lnr-cart"></span>
+                            <a href="#">add <span>to </span> cart</a>
+                        </p>
+                        <p class="arrival-review pull-right">
+                            <span class="lnr lnr-heart"></span>
+                            <span class="lnr lnr-frame-expand"></span>
+                        </p>
+                    </div>
+                </div>
+                <h4><a href="#">@item.p_name</a></h4>
+                <p class="arrival-product-price">@item.p_price</p>
+            </div>
 
 
+        </div> 
+        }
 
-    <div class="col-md-4">
-        <div class="card">
-
-
-            @{
-                foreach (var item in ViewBag.s)
-                {
-
-                    <img src="~/ProductImage/@item.pimage" alt="Denim Jeans" style="width:100%">
-                    <h1>@item.p_name</h1>
-                    <p class="price">@item.p_price</p>
-                    <p>@item.pdescription</p>
-                    <p><button>Add to Cart</button></p>
-
-
-
-
-                }
-
-            }
-        </div>
-    </div>
-</div>
-
+}
